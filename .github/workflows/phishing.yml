@@ -1,0 +1,22 @@
+name: Pull phishing File and Update Laravel
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Run every hour
+
+jobs:
+  pull-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout public GitHub repository
+        uses: actions/checkout@v2
+        with:
+          repository: owner/repo  # Replace 'owner/repo' with the actual repository path
+          ref: main  # Replace 'main' with the branch name
+
+      - name: Pull File and Update Laravel
+        run: |
+          cp path/to/updated/file /path/to/laravel/application/public
+          php /path/to/laravel/application/artisan update:file
+        working-directory: repo
